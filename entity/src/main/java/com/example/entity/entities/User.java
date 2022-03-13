@@ -1,14 +1,31 @@
 package com.example.entity.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.sun.istack.NotNull;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@Entity
-public class User {
+import javax.persistence.*;
+
+@Entity(name = "User")
+@Table(name = "\"user\"")
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+
+public class User extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
+
+    @Column(name = "username",nullable = false)
+    private String username;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Version
+    @Column(name = "version")
+    private  Integer version;
 }
